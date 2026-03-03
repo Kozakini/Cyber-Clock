@@ -1,1 +1,2 @@
 # Cyber-Clock
+Teraz git?
