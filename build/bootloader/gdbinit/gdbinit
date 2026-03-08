@@ -1,0 +1,2 @@
+source /home/wojtyla/Workspace/esp/examples/bme280/build/bootloader/gdbinit/symbols
+source /home/wojtyla/Workspace/esp/examples/bme280/build/bootloader/gdbinit/connect

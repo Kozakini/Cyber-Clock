@@ -1,0 +1,357 @@
+Command: /home/wojtyla/.espressif/python_env/idf5.5_py3.14_env/bin/python /opt/esp-idf/tools/idf_monitor.py -p /dev/ttyACM0 -b 115200 --toolchain-prefix xtensa-esp32s3-elf- --target esp32s3 --revision 0 /home/wojtyla/Workspace/esp/examples/bme280/build/bme280.elf /home/wojtyla/Workspace/esp/examples/bme280/build/bootloader/bootloader.elf -m '/home/wojtyla/.espressif/python_env/idf5.5_py3.14_env/bin/python' '/opt/esp-idf/tools/idf.py' '-p' '/dev/ttyACM0'
+�º�ESP-ROM:esp32s3-20210327
+Build:Mar 27 2021
+rst:0x1 (POWERON),boot:0xc (SPI_FAST_FLASH_BOOT)
+SPIWP:0xee
+mode:DIO, clock div:1
+load:0x3fce2820,len:0x158c
+load:0x403c8700,len:0xd24
+load:0x403cb700,len:0x2f34
+entry 0x403c8924
+[0;32mI (24) boot: ESP-IDF HEAD-HASH-NOTFOUND 2nd stage bootloader[0m
+[0;32mI (25) boot: compile time Mar  8 2026 14:43:23[0m
+[0;32mI (25) boot: Multicore bootloader[0m
+[0;32mI (26) boot: chip revision: v0.2[0m
+[0;32mI (29) boot: efuse block revision: v1.4[0m
+[0;32mI (32) boot.esp32s3: Boot SPI Speed : 80MHz[0m
+[0;32mI (36) boot.esp32s3: SPI Mode       : DIO[0m
+[0;32mI (40) boot.esp32s3: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (48) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (57) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (70) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (80) esp_image: segment 0: paddr=00010020 vaddr=3c020020 size=08f7ch ( 36732) map[0m
+[0;32mI (94) esp_image: segment 1: paddr=00018fa4 vaddr=3fc93600 size=028e0h ( 10464) load[0m
+[0;32mI (97) esp_image: segment 2: paddr=0001b88c vaddr=40374000 size=0478ch ( 18316) load[0m
+[0;32mI (106) esp_image: segment 3: paddr=00020020 vaddr=42000020 size=11e80h ( 73344) map[0m
+[0;32mI (123) esp_image: segment 4: paddr=00031ea8 vaddr=4037878c size=0ade8h ( 44520) load[0m
+[0;32mI (133) esp_image: segment 5: paddr=0003cc98 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (139) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (139) boot: Disabling RNG early entropy source...[0m
+[0;32mI (150) cpu_start: Multicore app[0m
+[0;32mI (159) cpu_start: GPIO 44 and 43 are used as console UART I/O pins[0m
+[0;32mI (160) cpu_start: Pro cpu start user code[0m
+[0;32mI (160) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (161) app_init: Application information:[0m
+[0;32mI (165) app_init: Project name:     bme280[0m
+[0;32mI (169) app_init: App version:      v5.5.2[0m
+[0;32mI (173) app_init: Compile time:     Mar  8 2026 14:43:21[0m
+[0;32mI (178) app_init: ELF file SHA256:  8e9aa09b2...[0m
+[0;32mI (182) app_init: ESP-IDF:          HEAD-HASH-NOTFOUND[0m
+[0;32mI (187) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (191) efuse_init: Max chip rev:     v0.99 [0m
+[0;32mI (195) efuse_init: Chip rev:         v0.2[0m
+[0;32mI (198) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (205) heap_init: At 3FC96778 len 00052F98 (331 KiB): RAM[0m
+[0;32mI (210) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
+[0;32mI (215) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (220) heap_init: At 600FE000 len 00001FE8 (7 KiB): RTCRAM[0m
+[0;32mI (226) spi_flash: detected chip: boya[0m
+[0;32mI (229) spi_flash: flash io: dio[0m
+[0;33mW (232) spi_flash: Detected size(16384k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;33mW (244) i2c: This driver is an old driver, please migrate your application code to adapt `driver/i2c_master.h`[0m
+[0;32mI (254) sleep_gpio: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (260) sleep_gpio: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (267) main_task: Started on CPU0[0m
+[0;32mI (277) main_task: Calling app_main()[0m
+[0;32mI (277) bme280: Chip ID: 0x60 (oczekiwano 0x60)[0m
+[0;32mI (277) bme280: Temperatura: 25.12 C[0m
+[0;32mI (277) bme280: Cisnienie:   1013.48 hPa[0m
+[0;32mI (287) bme280: Wilgotnosc:  30.95 %[0m
+[0;32mI (2287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (2287) bme280: Cisnienie:   1013.41 hPa[0m
+[0;32mI (2287) bme280: Wilgotnosc:  30.49 %[0m
+[0;32mI (4287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (4287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (4287) bme280: Wilgotnosc:  29.69 %[0m
+[0;32mI (6287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (6287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (6287) bme280: Wilgotnosc:  29.17 %[0m
+[0;32mI (8287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (8287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (8287) bme280: Wilgotnosc:  29.29 %[0m
+[0;32mI (10287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (10287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (10287) bme280: Wilgotnosc:  29.35 %[0m
+[0;32mI (12287) bme280: Temperatura: 25.12 C[0m
+[0;32mI (12287) bme280: Cisnienie:   1013.48 hPa[0m
+[0;32mI (12287) bme280: Wilgotnosc:  31.12 %[0m
+[0;32mI (14287) bme280: Temperatura: 25.17 C[0m
+[0;32mI (14287) bme280: Cisnienie:   1013.45 hPa[0m
+[0;32mI (14287) bme280: Wilgotnosc:  39.19 %[0m
+[0;32mI (16287) bme280: Temperatura: 25.20 C[0m
+[0;32mI (16287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (16287) bme280: Wilgotnosc:  39.75 %[0m
+[0;32mI (18287) bme280: Temperatura: 25.10 C[0m
+[0;32mI (18287) bme280: Cisnienie:   1013.72 hPa[0m
+[0;32mI (18287) bme280: Wilgotnosc:  59.72 %[0m
+[0;32mI (20287) bme280: Temperatura: 25.08 C[0m
+[0;32mI (20287) bme280: Cisnienie:   1013.42 hPa[0m
+[0;32mI (20287) bme280: Wilgotnosc:  62.21 %[0m
+[0;32mI (22287) bme280: Temperatura: 25.05 C[0m
+[0;32mI (22287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (22287) bme280: Wilgotnosc:  63.45 %[0m
+[0;32mI (24287) bme280: Temperatura: 25.08 C[0m
+[0;32mI (24287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (24287) bme280: Wilgotnosc:  64.40 %[0m
+[0;32mI (26287) bme280: Temperatura: 25.08 C[0m
+[0;32mI (26287) bme280: Cisnienie:   1013.39 hPa[0m
+[0;32mI (26287) bme280: Wilgotnosc:  65.23 %[0m
+[0;32mI (28287) bme280: Temperatura: 25.09 C[0m
+[0;32mI (28287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (28287) bme280: Wilgotnosc:  66.27 %[0m
+[0;32mI (30287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (30287) bme280: Cisnienie:   1013.40 hPa[0m
+[0;32mI (30287) bme280: Wilgotnosc:  66.90 %[0m
+[0;32mI (32287) bme280: Temperatura: 25.12 C[0m
+[0;32mI (32287) bme280: Cisnienie:   1013.34 hPa[0m
+[0;32mI (32287) bme280: Wilgotnosc:  67.49 %[0m
+[0;32mI (34287) bme280: Temperatura: 25.13 C[0m
+[0;32mI (34287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (34287) bme280: Wilgotnosc:  68.03 %[0m
+[0;32mI (36287) bme280: Temperatura: 25.13 C[0m
+[0;32mI (36287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (36287) bme280: Wilgotnosc:  68.53 %[0m
+[0;32mI (38287) bme280: Temperatura: 25.14 C[0m
+[0;32mI (38287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (38287) bme280: Wilgotnosc:  68.98 %[0m
+[0;32mI (40287) bme280: Temperatura: 25.16 C[0m
+[0;32mI (40287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (40287) bme280: Wilgotnosc:  69.62 %[0m
+[0;32mI (42287) bme280: Temperatura: 25.04 C[0m
+[0;32mI (42287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (42287) bme280: Wilgotnosc:  64.31 %[0m
+[0;32mI (44287) bme280: Temperatura: 25.04 C[0m
+[0;32mI (44287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (44287) bme280: Wilgotnosc:  51.49 %[0m
+[0;32mI (46287) bme280: Temperatura: 25.09 C[0m
+[0;32mI (46287) bme280: Cisnienie:   1013.54 hPa[0m
+[0;32mI (46287) bme280: Wilgotnosc:  47.59 %[0m
+[0;32mI (48287) bme280: Temperatura: 25.11 C[0m
+[0;32mI (48287) bme280: Cisnienie:   1013.46 hPa[0m
+[0;32mI (48287) bme280: Wilgotnosc:  47.49 %[0m
+[0;32mI (50287) bme280: Temperatura: 25.15 C[0m
+[0;32mI (50287) bme280: Cisnienie:   1013.50 hPa[0m
+[0;32mI (50287) bme280: Wilgotnosc:  44.82 %[0m
+[0;32mI (52287) bme280: Temperatura: 25.17 C[0m
+[0;32mI (52287) bme280: Cisnienie:   1013.58 hPa[0m
+[0;32mI (52287) bme280: Wilgotnosc:  45.50 %[0m
+[0;32mI (54287) bme280: Temperatura: 25.18 C[0m
+[0;32mI (54287) bme280: Cisnienie:   1013.53 hPa[0m
+[0;32mI (54287) bme280: Wilgotnosc:  42.97 %[0m
+[0;32mI (56287) bme280: Temperatura: 25.22 C[0m
+[0;32mI (56287) bme280: Cisnienie:   1013.51 hPa[0m
+[0;32mI (56287) bme280: Wilgotnosc:  50.02 %[0m
+[0;32mI (58287) bme280: Temperatura: 25.17 C[0m
+[0;32mI (58287) bme280: Cisnienie:   1013.56 hPa[0m
+[0;32mI (58287) bme280: Wilgotnosc:  49.28 %[0m
+[0;32mI (60287) bme280: Temperatura: 25.09 C[0m
+[0;32mI (60287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (60287) bme280: Wilgotnosc:  43.12 %[0m
+[0;32mI (62287) bme280: Temperatura: 25.04 C[0m
+[0;32mI (62287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (62287) bme280: Wilgotnosc:  38.16 %[0m
+[0;32mI (64287) bme280: Temperatura: 25.03 C[0m
+[0;32mI (64287) bme280: Cisnienie:   1013.48 hPa[0m
+[0;32mI (64287) bme280: Wilgotnosc:  35.33 %[0m
+[0;32mI (66287) bme280: Temperatura: 25.04 C[0m
+[0;32mI (66287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (66287) bme280: Wilgotnosc:  35.22 %[0m
+[0;32mI (68287) bme280: Temperatura: 25.01 C[0m
+[0;32mI (68287) bme280: Cisnienie:   1013.58 hPa[0m
+[0;32mI (68287) bme280: Wilgotnosc:  34.12 %[0m
+[0;32mI (70287) bme280: Temperatura: 25.00 C[0m
+[0;32mI (70287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (70287) bme280: Wilgotnosc:  32.76 %[0m
+[0;32mI (72287) bme280: Temperatura: 25.00 C[0m
+[0;32mI (72287) bme280: Cisnienie:   1013.51 hPa[0m
+[0;32mI (72287) bme280: Wilgotnosc:  32.38 %[0m
+[0;32mI (74287) bme280: Temperatura: 25.00 C[0m
+[0;32mI (74287) bme280: Cisnienie:   1013.51 hPa[0m
+[0;32mI (74287) bme280: Wilgotnosc:  31.84 %[0m
+[0;32mI (76287) bme280: Temperatura: 25.01 C[0m
+[0;32mI (76287) bme280: Cisnienie:   1013.48 hPa[0m
+[0;32mI (76287) bme280: Wilgotnosc:  32.15 %[0m
+[0;32mI (78287) bme280: Temperatura: 25.01 C[0m
+[0;32mI (78287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (78287) bme280: Wilgotnosc:  32.44 %[0m
+[0;32mI (80287) bme280: Temperatura: 25.02 C[0m
+[0;32mI (80287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (80287) bme280: Wilgotnosc:  31.63 %[0m
+[0;32mI (82287) bme280: Temperatura: 25.03 C[0m
+[0;32mI (82287) bme280: Cisnienie:   1013.51 hPa[0m
+[0;32mI (82287) bme280: Wilgotnosc:  32.31 %[0m
+[0;32mI (84287) bme280: Temperatura: 25.02 C[0m
+[0;32mI (84287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (84287) bme280: Wilgotnosc:  31.27 %[0m
+[0;32mI (86287) bme280: Temperatura: 25.04 C[0m
+[0;32mI (86287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (86287) bme280: Wilgotnosc:  31.50 %[0m
+[0;32mI (88287) bme280: Temperatura: 25.05 C[0m
+[0;32mI (88287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (88287) bme280: Wilgotnosc:  31.08 %[0m
+[0;32mI (90287) bme280: Temperatura: 25.07 C[0m
+[0;32mI (90287) bme280: Cisnienie:   1013.50 hPa[0m
+[0;32mI (90287) bme280: Wilgotnosc:  31.13 %[0m
+[0;32mI (92287) bme280: Temperatura: 25.08 C[0m
+[0;32mI (92287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (92287) bme280: Wilgotnosc:  30.75 %[0m
+[0;32mI (94287) bme280: Temperatura: 25.09 C[0m
+[0;32mI (94287) bme280: Cisnienie:   1013.37 hPa[0m
+[0;32mI (94287) bme280: Wilgotnosc:  31.47 %[0m
+[0;32mI (96287) bme280: Temperatura: 25.09 C[0m
+[0;32mI (96287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (96287) bme280: Wilgotnosc:  31.83 %[0m
+[0;32mI (98287) bme280: Temperatura: 25.12 C[0m
+[0;32mI (98287) bme280: Cisnienie:   1013.53 hPa[0m
+[0;32mI (98287) bme280: Wilgotnosc:  31.13 %[0m
+[0;32mI (100287) bme280: Temperatura: 25.12 C[0m
+[0;32mI (100287) bme280: Cisnienie:   1013.48 hPa[0m
+[0;32mI (100287) bme280: Wilgotnosc:  30.98 %[0m
+[0;32mI (102287) bme280: Temperatura: 25.12 C[0m
+[0;32mI (102287) bme280: Cisnienie:   1013.48 hPa[0m
+[0;32mI (102287) bme280: Wilgotnosc:  30.71 %[0m
+[0;32mI (104287) bme280: Temperatura: 25.13 C[0m
+[0;32mI (104287) bme280: Cisnienie:   1013.50 hPa[0m
+[0;32mI (104287) bme280: Wilgotnosc:  30.32 %[0m
+[0;32mI (106287) bme280: Temperatura: 25.14 C[0m
+[0;32mI (106287) bme280: Cisnienie:   1013.51 hPa[0m
+[0;32mI (106287) bme280: Wilgotnosc:  30.91 %[0m
+[0;32mI (108287) bme280: Temperatura: 25.15 C[0m
+[0;32mI (108287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (108287) bme280: Wilgotnosc:  30.00 %[0m
+[0;32mI (110287) bme280: Temperatura: 25.15 C[0m
+[0;32mI (110287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (110287) bme280: Wilgotnosc:  29.35 %[0m
+[0;32mI (112287) bme280: Temperatura: 25.16 C[0m
+[0;32mI (112287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (112287) bme280: Wilgotnosc:  29.83 %[0m
+[0;32mI (114287) bme280: Temperatura: 25.16 C[0m
+[0;32mI (114287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (114287) bme280: Wilgotnosc:  29.69 %[0m
+[0;32mI (116287) bme280: Temperatura: 25.20 C[0m
+[0;32mI (116287) bme280: Cisnienie:   1013.55 hPa[0m
+[0;32mI (116287) bme280: Wilgotnosc:  30.25 %[0m
+[0;32mI (118287) bme280: Temperatura: 25.20 C[0m
+[0;32mI (118287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (118287) bme280: Wilgotnosc:  30.00 %[0m
+[0;32mI (120287) bme280: Temperatura: 25.20 C[0m
+[0;32mI (120287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (120287) bme280: Wilgotnosc:  30.36 %[0m
+[0;32mI (122287) bme280: Temperatura: 25.21 C[0m
+[0;32mI (122287) bme280: Cisnienie:   1013.41 hPa[0m
+[0;32mI (122287) bme280: Wilgotnosc:  30.52 %[0m
+[0;32mI (124287) bme280: Temperatura: 25.21 C[0m
+[0;32mI (124287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (124287) bme280: Wilgotnosc:  29.90 %[0m
+[0;32mI (126287) bme280: Temperatura: 25.22 C[0m
+[0;32mI (126287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (126287) bme280: Wilgotnosc:  29.95 %[0m
+[0;32mI (128287) bme280: Temperatura: 25.23 C[0m
+[0;32mI (128287) bme280: Cisnienie:   1013.52 hPa[0m
+[0;32mI (128287) bme280: Wilgotnosc:  30.22 %[0m
+[0;32mI (130287) bme280: Temperatura: 25.23 C[0m
+[0;32mI (130287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (130287) bme280: Wilgotnosc:  29.56 %[0m
+[0;32mI (132287) bme280: Temperatura: 25.24 C[0m
+[0;32mI (132287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (132287) bme280: Wilgotnosc:  29.25 %[0m
+[0;32mI (134287) bme280: Temperatura: 25.24 C[0m
+[0;32mI (134287) bme280: Cisnienie:   1013.45 hPa[0m
+[0;32mI (134287) bme280: Wilgotnosc:  29.04 %[0m
+[0;32mI (136287) bme280: Temperatura: 25.25 C[0m
+[0;32mI (136287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (136287) bme280: Wilgotnosc:  29.88 %[0m
+[0;32mI (138287) bme280: Temperatura: 25.24 C[0m
+[0;32mI (138287) bme280: Cisnienie:   1013.45 hPa[0m
+[0;32mI (138287) bme280: Wilgotnosc:  29.47 %[0m
+[0;32mI (140287) bme280: Temperatura: 25.25 C[0m
+[0;32mI (140287) bme280: Cisnienie:   1013.42 hPa[0m
+[0;32mI (140287) bme280: Wilgotnosc:  28.99 %[0m
+[0;32mI (142287) bme280: Temperatura: 25.25 C[0m
+[0;32mI (142287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (142287) bme280: Wilgotnosc:  29.23 %[0m
+[0;32mI (144287) bme280: Temperatura: 25.27 C[0m
+[0;32mI (144287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (144287) bme280: Wilgotnosc:  29.93 %[0m
+[0;32mI (146287) bme280: Temperatura: 25.27 C[0m
+[0;32mI (146287) bme280: Cisnienie:   1013.50 hPa[0m
+[0;32mI (146287) bme280: Wilgotnosc:  29.17 %[0m
+[0;32mI (148287) bme280: Temperatura: 25.27 C[0m
+[0;32mI (148287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (148287) bme280: Wilgotnosc:  28.79 %[0m
+[0;32mI (150287) bme280: Temperatura: 25.26 C[0m
+[0;32mI (150287) bme280: Cisnienie:   1013.46 hPa[0m
+[0;32mI (150287) bme280: Wilgotnosc:  28.64 %[0m
+[0;32mI (152287) bme280: Temperatura: 25.27 C[0m
+[0;32mI (152287) bme280: Cisnienie:   1013.41 hPa[0m
+[0;32mI (152287) bme280: Wilgotnosc:  28.54 %[0m
+[0;32mI (154287) bme280: Temperatura: 25.27 C[0m
+[0;32mI (154287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (154287) bme280: Wilgotnosc:  28.54 %[0m
+[0;32mI (156287) bme280: Temperatura: 25.27 C[0m
+[0;32mI (156287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (156287) bme280: Wilgotnosc:  28.46 %[0m
+[0;32mI (158287) bme280: Temperatura: 25.28 C[0m
+[0;32mI (158287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (158287) bme280: Wilgotnosc:  28.46 %[0m
+[0;32mI (160287) bme280: Temperatura: 25.28 C[0m
+[0;32mI (160287) bme280: Cisnienie:   1013.41 hPa[0m
+[0;32mI (160287) bme280: Wilgotnosc:  28.44 %[0m
+[0;32mI (162287) bme280: Temperatura: 25.28 C[0m
+[0;32mI (162287) bme280: Cisnienie:   1013.38 hPa[0m
+[0;32mI (162287) bme280: Wilgotnosc:  28.39 %[0m
+[0;32mI (164287) bme280: Temperatura: 25.29 C[0m
+[0;32mI (164287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (164287) bme280: Wilgotnosc:  28.36 %[0m
+[0;32mI (166287) bme280: Temperatura: 25.30 C[0m
+[0;32mI (166287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (166287) bme280: Wilgotnosc:  28.29 %[0m
+[0;32mI (168287) bme280: Temperatura: 25.30 C[0m
+[0;32mI (168287) bme280: Cisnienie:   1013.44 hPa[0m
+[0;32mI (168287) bme280: Wilgotnosc:  28.88 %[0m
+[0;32mI (170287) bme280: Temperatura: 25.30 C[0m
+[0;32mI (170287) bme280: Cisnienie:   1013.42 hPa[0m
+[0;32mI (170287) bme280: Wilgotnosc:  29.51 %[0m
+[0;32mI (172287) bme280: Temperatura: 25.32 C[0m
+[0;32mI (172287) bme280: Cisnienie:   1013.45 hPa[0m
+[0;32mI (172287) bme280: Wilgotnosc:  29.85 %[0m
+[0;32mI (174287) bme280: Temperatura: 25.34 C[0m
+[0;32mI (174287) bme280: Cisnienie:   1013.47 hPa[0m
+[0;32mI (174287) bme280: Wilgotnosc:  29.86 %[0m
+[0;32mI (176287) bme280: Temperatura: 25.33 C[0m
+[0;32mI (176287) bme280: Cisnienie:   1013.49 hPa[0m
+[0;32mI (176287) bme280: Wilgotnosc:  29.48 %[0m
+[0;32mI (178287) bme280: Temperatura: 25.34 C[0m
+[0;32mI (178287) bme280: Cisnienie:   1013.40 hPa[0m
+[0;32mI (178287) bme280: Wilgotnosc:  29.36 %[0m
+[0;32mI (180287) bme280: Temperatura: 25.35 C[0m
+[0;32mI (180287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (180287) bme280: Wilgotnosc:  29.59 %[0m
+[0;32mI (182287) bme280: Temperatura: 25.34 C[0m
+[0;32mI (182287) bme280: Cisnienie:   1013.34 hPa[0m
+[0;32mI (182287) bme280: Wilgotnosc:  29.05 %[0m
+[0;32mI (184287) bme280: Temperatura: 25.34 C[0m
+[0;32mI (184287) bme280: Cisnienie:   1013.45 hPa[0m
+[0;32mI (184287) bme280: Wilgotnosc:  28.61 %[0m
+[0;32mI (186287) bme280: Temperatura: 25.34 C[0m
+[0;32mI (186287) bme280: Cisnienie:   1013.42 hPa[0m
+[0;32mI (186287) bme280: Wilgotnosc:  28.47 %[0m
+[0;32mI (188287) bme280: Temperatura: 25.36 C[0m
+[0;32mI (188287) bme280: Cisnienie:   1013.51 hPa[0m
+[0;32mI (188287) bme280: Wilgotnosc:  31.28 %[0m
+[0;32mI (190287) bme280: Temperatura: 25.35 C[0m
+[0;32mI (190287) bme280: Cisnienie:   1013.46 hPa[0m
+[0;32mI (190287) bme280: Wilgotnosc:  30.56 %[0m
+[0;32mI (192287) bme280: Temperatura: 25.35 C[0m
+[0;32mI (192287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (192287) bme280: Wilgotnosc:  29.92 %[0m
+[0;32mI (194287) bme280: Temperatura: 25.34 C[0m
+[0;32mI (194287) bme280: Cisnienie:   1013.43 hPa[0m
+[0;32mI (194287) bme280: Wilgotnosc:  29.72 %[0m
+[0;32mI (196287) bme280: Temperatura: 25.35 C[0m
+[0;32mI (196287) bme280: Cisnienie:   1013.41 hPa[0m
+[0;32mI (196287) bme280: Wilgotnosc:  30.96 %[0m
