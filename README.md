@@ -1,5 +1,5 @@
 # Cyber-Clock
-Cyber-Clock is a project that aims to be smiple and to be a cool watch to have.
+Cyber-Clock is a project that aims to provide you with a cool watch.
 
 to run:\
 source /opt/esp-idf/export.sh\
