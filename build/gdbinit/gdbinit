@@ -1,2 +1,2 @@
-source /home/wojtyla/Workspace/esp/examples/bme280/build/gdbinit/symbols
-source /home/wojtyla/Workspace/esp/examples/bme280/build/gdbinit/connect
+source /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/gdbinit/symbols
+source /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/gdbinit/connect

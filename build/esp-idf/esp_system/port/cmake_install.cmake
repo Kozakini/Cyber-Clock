@@ -39,12 +39,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_system/port/soc/esp32s3/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_system/port/soc/esp32s3/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_system/port/install_local_manifest.txt"
+  file(WRITE "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_system/port/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

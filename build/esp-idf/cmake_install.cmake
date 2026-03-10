@@ -39,272 +39,277 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/xtensa/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/xtensa/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_gpio/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_gpio/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_timer/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_timer/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_pm/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_pm/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/mbedtls/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/mbedtls/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/bootloader/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/bootloader/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esptool_py/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esptool_py/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/partition_table/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/partition_table/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_app_format/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_app_format/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_bootloader_format/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_bootloader_format/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/app_update/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/app_update/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_partition/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_partition/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/efuse/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/efuse/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/bootloader_support/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/bootloader_support/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_mm/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_mm/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/spi_flash/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/spi_flash/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_system/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_system/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_common/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_common/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_rom/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_rom/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/hal/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/hal/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/log/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/log/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/heap/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/heap/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/soc/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/soc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_security/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_security/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_hw_support/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_hw_support/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/freertos/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/freertos/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/newlib/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/newlib/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/pthread/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/pthread/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/cxx/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/cxx/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_ringbuf/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_ringbuf/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_pcnt/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_pcnt/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_gptimer/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_gptimer/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_spi/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_psram/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_mcpwm/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_spi/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_ana_cmpr/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_mcpwm/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_i2s/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_ana_cmpr/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/sdmmc/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_i2s/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_sdmmc/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/sdmmc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_sdspi/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_sdmmc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_sdio/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_sdspi/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_dac/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_sdio/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_bitscrambler/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_dac/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_rmt/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_bitscrambler/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_tsens/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_rmt/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_sdm/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_tsens/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_i2c/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_sdm/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_uart/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_i2c/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_ledc/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_uart/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_parlio/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_ledc/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_usb_serial_jtag/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_parlio/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/esp_driver_twai/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_usb_serial_jtag/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/driver/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_driver_twai/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/main/cmake_install.cmake")
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/driver/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/main/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/install_local_manifest.txt"
+  file(WRITE "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

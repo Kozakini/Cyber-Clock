@@ -3723,6 +3723,16 @@
         "children": [],
         "depends_on": null,
         "help": null,
+        "id": "SOC_WIFI_TXOP_SUPPORT",
+        "name": "SOC_WIFI_TXOP_SUPPORT",
+        "range": null,
+        "title": null,
+        "type": "bool"
+    },
+    {
+        "children": [],
+        "depends_on": null,
+        "help": null,
         "id": "SOC_WIFI_CSI_SUPPORT",
         "name": "SOC_WIFI_CSI_SUPPORT",
         "range": null,
@@ -8453,7 +8463,7 @@
                     {
                         "children": [],
                         "depends_on": "SOC_GPSPI_SUPPORTED",
-                        "help": "Normally only the ISR of SPI slave is placed in the IRAM, so that it\ncan work without the flash when interrupt is triggered.\nFor other functions, there's some possibility that the flash cache\nmiss when running inside and out of SPI functions, which may increase\nthe interval of SPI transactions.\nEnable this to put ``queue_trans``, ``get_trans_result`` and\n``transmit`` functions into the IRAM to avoid possible cache miss.",
+                        "help": "Normally only the ISR of SPI slave is placed in the IRAM, so that it\ncan work without the flash when interrupt is triggered.\nFor other functions, there is some possibility that the flash cache\nmiss when running inside and out of SPI functions, which may increase\nthe interval of SPI transactions.\nEnable this to put ``queue_trans``, ``get_trans_result`` and\n``transmit`` functions into the IRAM to avoid possible cache miss.",
                         "id": "SPI_SLAVE_IN_IRAM",
                         "name": "SPI_SLAVE_IN_IRAM",
                         "range": null,
@@ -8649,6 +8659,16 @@
             },
             {
                 "children": [
+                    {
+                        "children": [],
+                        "depends_on": null,
+                        "help": null,
+                        "id": "ESP_HW_SUPPORT_FUNC_IN_IRAM",
+                        "name": "ESP_HW_SUPPORT_FUNC_IN_IRAM",
+                        "range": null,
+                        "title": null,
+                        "type": "bool"
+                    },
                     {
                         "children": [
                             {
@@ -9110,6 +9130,26 @@
                                 ],
                                 "title": "Number of cycles for RTC_SLOW_CLK calibration",
                                 "type": "int"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Place RTC clock module (all rtc clock functions and const data) into IRAM.",
+                                "id": "RTC_CLK_FUNC_IN_IRAM",
+                                "name": "RTC_CLK_FUNC_IN_IRAM",
+                                "range": null,
+                                "title": "Place RTC clock module functions into IRAM",
+                                "type": "bool"
+                            },
+                            {
+                                "children": [],
+                                "depends_on": null,
+                                "help": "Place RTC time module (all rtc clock functions) into IRAM.",
+                                "id": "RTC_TIME_FUNC_IN_IRAM",
+                                "name": "RTC_TIME_FUNC_IN_IRAM",
+                                "range": null,
+                                "title": "Place RTC time module functions into IRAM",
+                                "type": "bool"
                             }
                         ],
                         "depends_on": null,
@@ -9813,6 +9853,385 @@
                 "depends_on": null,
                 "id": "component-config-power-management",
                 "title": "Power Management",
+                "type": "menu"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_MODE>",
+                                                "help": null,
+                                                "id": "SPIRAM_MODE_QUAD",
+                                                "name": "SPIRAM_MODE_QUAD",
+                                                "range": null,
+                                                "title": "Quad Mode PSRAM",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_MODE>",
+                                                "help": null,
+                                                "id": "SPIRAM_MODE_OCT",
+                                                "name": "SPIRAM_MODE_OCT",
+                                                "range": null,
+                                                "title": "Octal Mode PSRAM",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": null,
+                                        "id": "component-config-esp-psram-support-for-external-spi-connected-ram-spi-ram-config-mode-quad-oct-of-spi-ram-chip-in-use",
+                                        "name": "SPIRAM_MODE",
+                                        "title": "Mode (QUAD/OCT) of SPI RAM chip in use",
+                                        "type": "choice"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_TYPE>",
+                                                "help": null,
+                                                "id": "SPIRAM_TYPE_AUTO",
+                                                "name": "SPIRAM_TYPE_AUTO",
+                                                "range": null,
+                                                "title": "Auto-detect",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "SPIRAM_MODE_QUAD && <choice SPIRAM_TYPE>",
+                                                "help": null,
+                                                "id": "SPIRAM_TYPE_ESPPSRAM16",
+                                                "name": "SPIRAM_TYPE_ESPPSRAM16",
+                                                "range": null,
+                                                "title": "ESP-PSRAM16 or APS1604",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "SPIRAM_MODE_QUAD && <choice SPIRAM_TYPE>",
+                                                "help": null,
+                                                "id": "SPIRAM_TYPE_ESPPSRAM32",
+                                                "name": "SPIRAM_TYPE_ESPPSRAM32",
+                                                "range": null,
+                                                "title": "ESP-PSRAM32",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_TYPE>",
+                                                "help": null,
+                                                "id": "SPIRAM_TYPE_ESPPSRAM64",
+                                                "name": "SPIRAM_TYPE_ESPPSRAM64",
+                                                "range": null,
+                                                "title": "ESP-PSRAM64 , LY68L6400 or APS6408",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": null,
+                                        "id": "component-config-esp-psram-support-for-external-spi-connected-ram-spi-ram-config-type-of-spiram-chip-in-use",
+                                        "name": "SPIRAM_TYPE",
+                                        "title": "Type of SPIRAM chip in use",
+                                        "type": "choice"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": null,
+                                        "id": "SPIRAM_CLK_IO",
+                                        "name": "SPIRAM_CLK_IO",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": null,
+                                        "id": "SPIRAM_CS_IO",
+                                        "name": "SPIRAM_CS_IO",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Helper for selecting both `SPIRAM_FETCH_INSTRUCTIONS` and `SPIRAM_RODATA`",
+                                        "id": "SPIRAM_XIP_FROM_PSRAM",
+                                        "name": "SPIRAM_XIP_FROM_PSRAM",
+                                        "range": null,
+                                        "title": "Enable Executable in place from (XiP) from PSRAM feature",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If enabled, instructions in flash will be moved into PSRAM on startup.\nIf SPIRAM_RODATA is also enabled, code that requires execution during an MSPI1 Flash operation\ncan forgo being placed in IRAM. Therefore codes that need to be executing during Flash\noperation can continue working normally.\n\nThis feature is useful for high throughput peripheral involved applications to improve\nthe performance during MSPI1 flash operations. PSRAM access speed is faster than Flash access.\nSo the performance is better. (see External RAM documentation for more details).",
+                                        "id": "SPIRAM_FETCH_INSTRUCTIONS",
+                                        "name": "SPIRAM_FETCH_INSTRUCTIONS",
+                                        "range": null,
+                                        "title": "Move Instructions in Flash to PSRAM",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If enabled, rodata in flash will be moved into PSRAM on startup.\nIf SPIRAM_FETCH_INSTRUCTIONS is also enabled, code that requires execution during an MSPI1 Flash operation\nis not necessary to be placed in IRAM. Therefore codes that need to be executing during Flash\noperation can continue working normally.\n\nThis feature is useful for high throughput peripheral involved applications to improve\nthe performance during MSPI1 flash operations. PSRAM access speed is faster than Flash access.\nSo the performance is better. (see External RAM documentation for more details).",
+                                        "id": "SPIRAM_RODATA",
+                                        "name": "SPIRAM_RODATA",
+                                        "range": null,
+                                        "title": "Move Read-Only Data in Flash to PSRAM",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "(SPIRAM_MODE_QUAD || IDF_EXPERIMENTAL_FEATURES) && <choice SPIRAM_SPEED>",
+                                                "help": "- Quad PSRAM 120 MHz is stable.\n\n- Octal PSRAM 120 MHz is an experimental feature, it works when\n  the temperature is stable.\n\n    Risks:\n        If your chip powers on at a certain temperature, then after the temperature\n        increases or decreases by approximately 20 Celsius degrees (depending on the\n        chip), the accesses to / from PSRAM will crash randomly.",
+                                                "id": "SPIRAM_SPEED_120M",
+                                                "name": "SPIRAM_SPEED_120M",
+                                                "range": null,
+                                                "title": "120MHz clock speed (READ DOCS FIRST)",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_SPEED>",
+                                                "help": null,
+                                                "id": "SPIRAM_SPEED_80M",
+                                                "name": "SPIRAM_SPEED_80M",
+                                                "range": null,
+                                                "title": "80MHz clock speed",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_SPEED>",
+                                                "help": null,
+                                                "id": "SPIRAM_SPEED_40M",
+                                                "name": "SPIRAM_SPEED_40M",
+                                                "range": null,
+                                                "title": "40Mhz clock speed",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Select the speed for the SPI RAM chip.",
+                                        "id": "component-config-esp-psram-support-for-external-spi-connected-ram-spi-ram-config-set-ram-clock-speed",
+                                        "name": "SPIRAM_SPEED",
+                                        "title": "Set RAM clock speed",
+                                        "type": "choice"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "SPIRAM_TIMING_TUNING_POINT_VIA_TEMPERATURE_SENSOR && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                                "help": "Due to adjusting timing point automatically when temperature change, the task will measure current\ntemperature value in some specific interval. This configuration option would help you to set the\nproper interval. The interval unit is second.",
+                                                "id": "SPIRAM_TIMING_MEASURE_TEMPERATURE_INTERVAL_SECOND",
+                                                "name": "SPIRAM_TIMING_MEASURE_TEMPERATURE_INTERVAL_SECOND",
+                                                "range": null,
+                                                "title": "PSRAM timing tuning measure temperature interval (unit: second)",
+                                                "type": "int"
+                                            }
+                                        ],
+                                        "depends_on": "SPIRAM_SPEED_120M && SPIRAM_MODE_OCT && IDF_EXPERIMENTAL_FEATURES && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Temperature would influence the source clock frequency so that the timing tuning point set in start-up\nmight not be always proper when temperature varies in high range. This configuration would help checking\nthe temperature in real-time, and adjust timing point automatically when temperature change.\n(see External RAM documentation for more details)",
+                                        "id": "SPIRAM_TIMING_TUNING_POINT_VIA_TEMPERATURE_SENSOR",
+                                        "name": "SPIRAM_TIMING_TUNING_POINT_VIA_TEMPERATURE_SENSOR",
+                                        "range": null,
+                                        "title": "Adjust PSRAM timing tuning point via on-chip temperature sensor in real-time",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": null,
+                                        "id": "SPIRAM_SPEED",
+                                        "name": "SPIRAM_SPEED",
+                                        "range": null,
+                                        "title": null,
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM_MODE_OCT && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Enable MSPI Error-Correcting Code function when accessing SPIRAM.\n\nIf enabled, 1/16 of the SPI RAM total size will be reserved for error-correcting code.",
+                                        "id": "SPIRAM_ECC_ENABLE",
+                                        "name": "SPIRAM_ECC_ENABLE",
+                                        "range": null,
+                                        "title": "Enable SPI RAM ECC",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "SPIRAM_BOOT_HW_INIT && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                                "help": "If this is enabled, the PSRAM will be enabled during initial boot. Unless you\nhave specific requirements, you'll want to leave this enabled so memory allocated\nduring boot-up can also be placed in PSRAM.",
+                                                "id": "SPIRAM_BOOT_INIT",
+                                                "name": "SPIRAM_BOOT_INIT",
+                                                "range": null,
+                                                "title": "Initialize PSRAM during startup, including the hardware and memory related configurations",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "SPIRAM && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If this is enabled, the PSRAM hardware will be initialized during startup.\nEnabling this config does not ensure make sure the availability of the PSRAM for usage,\nbut just initialises the PSRAM hardware.\nThis is necessary to configure PSRAM memory protection during the boot up.",
+                                        "id": "SPIRAM_BOOT_HW_INIT",
+                                        "name": "SPIRAM_BOOT_HW_INIT",
+                                        "range": null,
+                                        "title": "Initialise the PSRAM related hardware",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If this is enabled, the PSRAM will be pre-configured for memory protection during initial boot.\nThis configuration takes into consideration the PSRAM memory configurations that are performed\nby ESP-IDF's default PSRAM initialization function, esp_psram_init().\nThus, the config is enabled by default when SPIRAM_BOOT_INIT is enabled,\nbecause the function esp_psram_init() would be called in the startup code.\n\nIn case you wish to disable SPIRAM_BOOT_INIT just for delaying the PSRAM initialization and plan\nto use the ESP-IDF's default PSRAM initialization function, esp_psram_init() in the application code,\nyou should still enable this config to enable memory protection for the PSRAM.\n\nNote that enabling this config also considers that the rest of the PSRAM memory that is left after\nthe memory configurations are performed by esp_psram_init(), can be allocated to the heap using the function\nesp_psram_extram_add_to_heap_allocator(), thus configures this region with heap memory protection (RW).\n\nAs an advanced usage, if you plan to initialize the PSRAM memory regions manually by yourself without\nusing the function esp_psram_init(), you should disable this config to avoid any memory protection and\nusage conflicts.",
+                                        "id": "SPIRAM_PRE_CONFIGURE_MEMORY_PROTECTION",
+                                        "name": "SPIRAM_PRE_CONFIGURE_MEMORY_PROTECTION",
+                                        "range": null,
+                                        "title": "Pre-configure memory protection for PSRAM",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM_BOOT_HW_INIT && !SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY && !SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Normally, if psram initialization is enabled during compile time but not found at runtime, it\nis seen as an error making the CPU panic. If this is enabled, booting will complete\nbut no PSRAM will be available. In particular, it is important to note that when SPIRAM_IGNORE_NOTFOUND\nis enabled, some WIFI related configs will be set to the default value used when SPIRAM is disabled.\nIt can be assumed that by enabling this config, WIFI and LWIP will assume that the current chip does not\nhave SPIRAM. SPIRAM_TRY_ALLOCATE_WIFI_LWIP will not work, buffers in WIFI and LWIP will be set to smaller\nranges and default values. WIFI_CACHE_TX_BUFFER_NUM and ESP_WIFI_AMSDU_TX_ENABLED will be disabled,\nESP_WIFI_TX_BUFFER will be set to ESP_WIFI_DYNAMIC_TX_BUFFER.",
+                                        "id": "SPIRAM_IGNORE_NOTFOUND",
+                                        "name": "SPIRAM_IGNORE_NOTFOUND",
+                                        "range": null,
+                                        "title": "Ignore PSRAM when not found",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_USE>",
+                                                "help": null,
+                                                "id": "SPIRAM_USE_MEMMAP",
+                                                "name": "SPIRAM_USE_MEMMAP",
+                                                "range": null,
+                                                "title": "Integrate RAM into memory map",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_USE>",
+                                                "help": null,
+                                                "id": "SPIRAM_USE_CAPS_ALLOC",
+                                                "name": "SPIRAM_USE_CAPS_ALLOC",
+                                                "range": null,
+                                                "title": "Make RAM allocatable using heap_caps_malloc(..., MALLOC_CAP_SPIRAM)",
+                                                "type": "bool"
+                                            },
+                                            {
+                                                "children": [],
+                                                "depends_on": "<choice SPIRAM_USE>",
+                                                "help": null,
+                                                "id": "SPIRAM_USE_MALLOC",
+                                                "name": "SPIRAM_USE_MALLOC",
+                                                "range": null,
+                                                "title": "Make RAM allocatable using malloc() as well",
+                                                "type": "bool"
+                                            }
+                                        ],
+                                        "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "The SPI RAM can be accessed in multiple methods: by just having it available as an unmanaged\nmemory region in the CPU's memory map, by integrating it in the heap as 'special' memory\nneeding heap_caps_malloc to allocate, or by fully integrating it making malloc() also able to\nreturn SPI RAM pointers.",
+                                        "id": "component-config-esp-psram-support-for-external-spi-connected-ram-spi-ram-config-spi-ram-access-method",
+                                        "name": "SPIRAM_USE",
+                                        "title": "SPI RAM access method",
+                                        "type": "choice"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM_BOOT_INIT && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Runs a rudimentary memory test on initialization. Aborts when memory test fails. Disable this for\nslightly faster startup.",
+                                        "id": "SPIRAM_MEMTEST",
+                                        "name": "SPIRAM_MEMTEST",
+                                        "range": null,
+                                        "title": "Run memory test on SPI RAM initialization",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM_USE_MALLOC && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If malloc() is capable of also allocating SPI-connected ram, its allocation strategy will prefer to\nallocate chunks less than this size in internal memory, while allocations larger than this will be\ndone from external RAM. If allocation from the preferred region fails, an attempt is made to allocate\nfrom the non-preferred region instead, so malloc() will not suddenly fail when either internal or\nexternal memory is full.",
+                                        "id": "SPIRAM_MALLOC_ALWAYSINTERNAL",
+                                        "name": "SPIRAM_MALLOC_ALWAYSINTERNAL",
+                                        "range": null,
+                                        "title": "Maximum malloc() size, in bytes, to always put in internal memory",
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "(SPIRAM_USE_CAPS_ALLOC || SPIRAM_USE_MALLOC) && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Try to allocate memories of WiFi and LWIP in SPIRAM firstly. If failed, try to allocate internal\nmemory then.",
+                                        "id": "SPIRAM_TRY_ALLOCATE_WIFI_LWIP",
+                                        "name": "SPIRAM_TRY_ALLOCATE_WIFI_LWIP",
+                                        "range": null,
+                                        "title": "Try to allocate memories of WiFi and LWIP in SPIRAM firstly. If failed, allocate internal memory",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM_USE_MALLOC && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "Because the external/internal RAM allocation strategy is not always perfect, it sometimes may happen\nthat the internal memory is entirely filled up. This causes allocations that are specifically done in\ninternal memory, for example the stack for new tasks or memory to service DMA or have memory that's\nalso available when SPI cache is down, to fail. This option reserves a pool specifically for requests\nlike that; the memory in this pool is not given out when a normal malloc() is called.\n\nSet this to 0 to disable this feature.\n\nNote that because FreeRTOS stacks are forced to internal memory, they will also use this memory pool;\nbe sure to keep this in mind when adjusting this value.\n\nNote also that the DMA reserved pool may not be one single contiguous memory region, depending on the\nconfigured size and the static memory usage of the app.",
+                                        "id": "SPIRAM_MALLOC_RESERVE_INTERNAL",
+                                        "name": "SPIRAM_MALLOC_RESERVE_INTERNAL",
+                                        "range": null,
+                                        "title": "Reserve this amount of bytes for data that specifically needs to be in DMA or internal memory",
+                                        "type": "int"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If enabled, variables with EXT_RAM_BSS_ATTR attribute will be placed in SPIRAM instead of internal DRAM.\nBSS section of `lwip`, `net80211`, `pp`, `bt` libraries will be automatically placed\nin SPIRAM. BSS sections from other object files and libraries can also be placed in SPIRAM through\nlinker fragment scheme `extram_bss`.\n\nNote that the variables placed in SPIRAM using EXT_RAM_BSS_ATTR will be zero initialized.",
+                                        "id": "SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY",
+                                        "name": "SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY",
+                                        "range": null,
+                                        "title": "Allow .bss segment placed in external memory",
+                                        "type": "bool"
+                                    },
+                                    {
+                                        "children": [],
+                                        "depends_on": "SPIRAM && SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                        "help": "If enabled, noinit variables can be placed in PSRAM using EXT_RAM_NOINIT_ATTR.\n\nNote the values placed into this section will not be initialized at startup and should keep its value\nafter software restart.",
+                                        "id": "SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY",
+                                        "name": "SPIRAM_ALLOW_NOINIT_SEG_EXTERNAL_MEMORY",
+                                        "range": null,
+                                        "title": "Allow .noinit segment placed in external memory",
+                                        "type": "bool"
+                                    }
+                                ],
+                                "depends_on": "SPIRAM && !APP_BUILD_TYPE_PURE_RAM_APP",
+                                "id": "component-config-esp-psram-support-for-external-spi-connected-ram-spi-ram-config",
+                                "title": "SPI RAM config",
+                                "type": "menu"
+                            }
+                        ],
+                        "depends_on": "!APP_BUILD_TYPE_PURE_RAM_APP",
+                        "help": "This enables support for an external SPI RAM chip, connected in parallel with the\nmain SPI flash chip.",
+                        "id": "SPIRAM",
+                        "name": "SPIRAM",
+                        "range": null,
+                        "title": "Support for external, SPI-connected RAM",
+                        "type": "bool"
+                    }
+                ],
+                "depends_on": "!APP_BUILD_TYPE_PURE_RAM_APP",
+                "id": "component-config-esp-psram",
+                "title": "ESP PSRAM",
                 "type": "menu"
             },
             {

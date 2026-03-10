@@ -10,18 +10,18 @@ if(NOT EXISTS "/opt/esp-idf/components/bootloader/subproject")
   file(MAKE_DIRECTORY "/opt/esp-idf/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
-  "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader"
-  "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix"
-  "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix/tmp"
-  "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix/src/bootloader-stamp"
-  "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix/src"
-  "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader"
+  "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix"
+  "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/tmp"
+  "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src"
+  "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "/home/wojtyla/Workspace/esp/examples/bme280/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

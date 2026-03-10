@@ -1,4 +1,4 @@
-# Install script for directory: /opt/esp-idf/components/esp_system/port/soc/esp32s3
+# Install script for directory: /opt/esp-idf/components/esp_psram
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,6 +40,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_system/port/soc/esp32s3/install_local_manifest.txt"
+  file(WRITE "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/esp_psram/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

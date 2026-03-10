@@ -1,4 +1,4 @@
-# Install script for directory: /home/wojtyla/Workspace/esp/examples/bme280/main
+# Install script for directory: /home/wojtyla/workspace/github/kozakini/Cyber-Clock/main
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,6 +40,6 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
-  file(WRITE "/home/wojtyla/Workspace/esp/examples/bme280/build/esp-idf/main/install_local_manifest.txt"
+  file(WRITE "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/main/install_local_manifest.txt"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()
