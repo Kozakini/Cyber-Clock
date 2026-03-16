@@ -1,0 +1,31 @@
+# ESP-IDF build output
+build/
+dist/
+
+# Konfiguracja projektu (generowana przez idf.py menuconfig)
+sdkconfig
+sdkconfig.old
+
+# Eclipse / VS Code
+.vscode/
+.eclipse/
+*.launch
+.settings/
+
+# Clangd (generowany przez idf.py)
+compile_commands.json
+.clangd/
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logi
+*.log
+
+# Klucze i dane wrażliwe — WAŻNE!
+secrets.h
+config_private.h
+
