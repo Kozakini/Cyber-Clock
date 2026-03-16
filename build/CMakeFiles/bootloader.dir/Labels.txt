@@ -1,6 +1,7 @@
 # Target labels
  bootloader
 # Source files and their labels
+<<<<<<< HEAD
 /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/bootloader
 /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/bootloader.rule
 /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/bootloader-complete.rule
@@ -11,3 +12,15 @@
 /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
 /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
 /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+=======
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/bootloader
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/bootloader.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/bootloader-complete.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302

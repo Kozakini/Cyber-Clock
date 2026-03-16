@@ -10,18 +10,34 @@ if(NOT EXISTS "/opt/esp-idf/components/bootloader/subproject")
   file(MAKE_DIRECTORY "/opt/esp-idf/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
+<<<<<<< HEAD
   "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader"
   "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix"
   "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/tmp"
   "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp"
   "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src"
   "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp"
+=======
+  "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader"
+  "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix"
+  "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/tmp"
+  "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp"
+  "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src"
+  "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp"
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
+<<<<<<< HEAD
     file(MAKE_DIRECTORY "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
   file(MAKE_DIRECTORY "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+=======
+    file(MAKE_DIRECTORY "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+endforeach()
+if(cfgdir)
+  file(MAKE_DIRECTORY "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 endif()

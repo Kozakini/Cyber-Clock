@@ -2,6 +2,7 @@
 	"sources" : 
 	[
 		{
+<<<<<<< HEAD
 			"file" : "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/bootloader"
 		},
 		{
@@ -30,6 +31,36 @@
 		},
 		{
 			"file" : "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+=======
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/bootloader"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/bootloader.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/bootloader-complete.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
+		},
+		{
+			"file" : "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 		}
 	],
 	"target" : 

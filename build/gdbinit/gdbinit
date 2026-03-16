@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 source /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/gdbinit/symbols
 source /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/gdbinit/connect
+=======
+source /home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/gdbinit/symbols
+source /home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/gdbinit/connect
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302

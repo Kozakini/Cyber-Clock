@@ -13,8 +13,16 @@ end
 
 # Load bootloader symbols
 set confirm off
+<<<<<<< HEAD
     add-symbol-file /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bootloader/bootloader.elf
 set confirm on
 
 # Load application symbols
 file /home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/bme280.elf
+=======
+    add-symbol-file /home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bootloader/bootloader.elf
+set confirm on
+
+# Load application symbols
+file /home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/bme280.elf
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302

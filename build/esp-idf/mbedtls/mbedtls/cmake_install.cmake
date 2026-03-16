@@ -39,16 +39,27 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
+<<<<<<< HEAD
   include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
   include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
   include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
   include("/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/pkgconfig/cmake_install.cmake")
+=======
+  include("/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/include/cmake_install.cmake")
+  include("/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/3rdparty/cmake_install.cmake")
+  include("/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/library/cmake_install.cmake")
+  include("/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/pkgconfig/cmake_install.cmake")
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 if(CMAKE_INSTALL_LOCAL_ONLY)
+<<<<<<< HEAD
   file(WRITE "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/install_local_manifest.txt"
+=======
+  file(WRITE "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/esp-idf/mbedtls/mbedtls/install_local_manifest.txt"
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

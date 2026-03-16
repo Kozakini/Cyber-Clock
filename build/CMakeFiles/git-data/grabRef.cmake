@@ -15,10 +15,17 @@
 
 set(HEAD_HASH)
 
+<<<<<<< HEAD
 file(READ "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/git-data/HEAD" HEAD_CONTENTS LIMIT 1024)
 
 string(STRIP "${HEAD_CONTENTS}" HEAD_CONTENTS)
 set(GIT_DIR "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/.git")
+=======
+file(READ "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/git-data/HEAD" HEAD_CONTENTS LIMIT 1024)
+
+string(STRIP "${HEAD_CONTENTS}" HEAD_CONTENTS)
+set(GIT_DIR "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/.git")
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 # handle git-worktree
 if(EXISTS "${GIT_DIR}/commondir")
 	file(READ "${GIT_DIR}/commondir" GIT_DIR_NEW LIMIT 1024)
@@ -34,17 +41,31 @@ if(HEAD_CONTENTS MATCHES "ref")
 	# named branch
 	string(REPLACE "ref: " "" HEAD_REF "${HEAD_CONTENTS}")
 	if(EXISTS "${GIT_DIR}/${HEAD_REF}")
+<<<<<<< HEAD
 		configure_file("${GIT_DIR}/${HEAD_REF}" "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/git-data/head-ref" COPYONLY)
 	elseif(EXISTS "${GIT_DIR}/logs/${HEAD_REF}")
 		configure_file("${GIT_DIR}/logs/${HEAD_REF}" "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/git-data/head-ref" COPYONLY)
+=======
+		configure_file("${GIT_DIR}/${HEAD_REF}" "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/git-data/head-ref" COPYONLY)
+	elseif(EXISTS "${GIT_DIR}/logs/${HEAD_REF}")
+		configure_file("${GIT_DIR}/logs/${HEAD_REF}" "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/git-data/head-ref" COPYONLY)
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 		set(HEAD_HASH "${HEAD_REF}")
 	endif()
 else()
 	# detached HEAD
+<<<<<<< HEAD
 	configure_file("${GIT_DIR}/HEAD" "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/git-data/head-ref" COPYONLY)
 endif()
 
 if(NOT HEAD_HASH)
 	file(READ "/home/wojtyla/workspace/github/kozakini/Cyber-Clock/build/CMakeFiles/git-data/head-ref" HEAD_HASH LIMIT 1024)
+=======
+	configure_file("${GIT_DIR}/HEAD" "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/git-data/head-ref" COPYONLY)
+endif()
+
+if(NOT HEAD_HASH)
+	file(READ "/home/wojtyla/Workspace/github.com/kozakini/cyber-clock/Cyber-Clock/build/CMakeFiles/git-data/head-ref" HEAD_HASH LIMIT 1024)
+>>>>>>> 71382ccdf115a121c3a9ba78d66a495428a76302
 	string(STRIP "${HEAD_HASH}" HEAD_HASH)
 endif()
