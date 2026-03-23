@@ -45,9 +45,17 @@ static void dat(uint8_t d) {
 }
 
 static void wait_busy(void) {
-    // BUSY: 0 = zajęty, 1 = gotowy
-    while (gpio_get_level(PIN_BUSY) == 1)
+    int timeout = 0;
+    while (gpio_get_level(PIN_BUSY) == 1) {
         vTaskDelay(pdMS_TO_TICKS(10));
+        timeout++;
+        if (timeout % 100 == 0)
+            ESP_LOGW("EPD", "czeka na BUSY... %dms", timeout*10);
+        if (timeout > 1000) {
+            ESP_LOGE("EPD", "BUSY timeout!");
+            return;
+        }
+    }
 }
 
 static void reset(void) {
