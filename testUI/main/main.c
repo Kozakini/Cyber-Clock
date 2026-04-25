@@ -18,7 +18,7 @@
 #include <math.h>
 #include <time.h>
 #include <sys/time.h>
-
+#include "bme280_mqtt.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -463,6 +463,9 @@ void app_main(void) {
         ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
+    bme280_mqtt_init();  // raz na starcie
+
+
 
     // Sprzęt
     hw_init();
@@ -489,13 +492,23 @@ void app_main(void) {
     // ---- Pętla główna ----
     int  cycle         = 0;
     // Pogodę odświeżamy co 10 cykli = co 50 min (ograniczenie API: 60 req/h)
-    int  weather_every = 10;
 
+
+    if (sntp_get_sync_status() == SNTP_SYNC_STATUS_COMPLETED)
+        ESP_LOGI(TAG, "NTP OK");
+    else
+        ESP_LOGW(TAG, "NTP niesync");
     while (1) {
         // Czas
         ui_time_t now;
         get_time(&now);
+        bme280_data_t data;
+        bme280_mqtt_publish(&data);  // odczyt + publikacja JSON
 
+        // data.temperature, data.humidity, data.pressure
+        // możesz przekazać do swojego kodu e-Paper
+
+        vTaskDelay(pdMS_TO_TICKS(180000));  // 180s
         // Rysuj UI
         ui_draw(&now, &g_weather, bmp_data, BMP_W, BMP_H);
 
@@ -507,7 +520,8 @@ void app_main(void) {
         cycle++;
 
         // Odświeżaj pogodę rzadziej
-        if (cycle % weather_every == 0) {
+        if (cycle == 10) {
+            cycle = 0;
             // Sprawdź czy WiFi nadal działa
             EventBits_t bits = xEventGroupGetBits(wifi_event_group);
             if (bits & WIFI_CONNECTED_BIT)
