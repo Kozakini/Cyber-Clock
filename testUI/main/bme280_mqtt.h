@@ -9,7 +9,8 @@
 #define BME280_I2C_PORT     I2C_NUM_0
 #define BME280_SDA_PIN      21
 #define BME280_SCL_PIN      22
-
+#define MQTT_USERNAME  "telegraf"   // osobny user dla ESP32
+#define MQTT_PASSWORD  "ESP32_S3"
 #define MQTT_BROKER_URI     "mqtt://192.168.1.100"
 #define MQTT_BROKER_PORT    1883
 #define MQTT_TOPIC          "home/epaper/data"

@@ -327,29 +327,40 @@ esp_err_t bme280_mqtt_publish(bme280_data_t *out_data)
     }
 
     /* zbuduj JSON */
-    char payload[96];
-    snprintf(payload, sizeof(payload),
-             "{\"temp\":%.2f,\"hum\":%.2f,\"press\":%.2f}",
-             temp, hum, press);
-
     /* sprawdź czy połączony */
-    EventBits_t bits = xEventGroupGetBits(s_mqtt_events);
-    if (!(bits & MQTT_CONNECTED_BIT)) {
-        ESP_LOGW(TAG, "MQTT niepołączony, pomijam publikację");
-        return ESP_ERR_INVALID_STATE;
-    }
+        EventBits_t bits = xEventGroupGetBits(s_mqtt_events);
+        if (!(bits & MQTT_CONNECTED_BIT)) {
+            ESP_LOGW(TAG, "MQTT niepołączony, pomijam publikację");
+            return ESP_ERR_INVALID_STATE;
+        }
 
-    int msg_id = esp_mqtt_client_publish(s_mqtt_client, MQTT_TOPIC,
-                                         payload, 0,
-                                         1,    /* QoS 1 */
-                                         0);   /* retain 0 */
-    if (msg_id < 0) {
-        ESP_LOGE(TAG, "Błąd publikacji MQTT");
-        return ESP_FAIL;
-    }
+        /* każdy pomiar na osobny subtopic, payload = sama wartość */
+        static const struct {
+            const char *subtopic;
+            float       value;
+        } measurements[] = {
+            { MQTT_TOPIC "/temperature", temp  },
+            { MQTT_TOPIC "/humidity",    hum   },
+            { MQTT_TOPIC "/pressure",    press },
+        };
 
-    ESP_LOGI(TAG, "Opublikowano: %s", payload);
-    return ESP_OK;
+        char payload[16];
+        for (int i = 0; i < 3; i++) {
+            snprintf(payload, sizeof(payload), "{\"value\":%.2f}", measurements[i].value);
+
+            int msg_id = esp_mqtt_client_publish(s_mqtt_client,
+                                                 measurements[i].subtopic,
+                                                 payload, 0,
+                                                 1,   /* QoS 1 */
+                                                 0);  /* retain 0 */
+            if (msg_id < 0) {
+                ESP_LOGE(TAG, "Błąd publikacji MQTT (%s)", measurements[i].subtopic);
+                return ESP_FAIL;
+            }
+            ESP_LOGI(TAG, "Opublikowano [%s]: %s", measurements[i].subtopic, payload);
+        }
+
+        return ESP_OK;
 }
 
 void bme280_mqtt_deinit(void)
