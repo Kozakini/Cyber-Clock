@@ -1,11 +1,11 @@
 #pragma once
 
 // WiFi
-#define WIFI_SSID           "twoja_siec"
-#define WIFI_PASSWORD       "twoje_haslo"
+#define WIFI_SSID           "Pixel_3517"
+#define WIFI_PASSWORD       "44332211"
 
 // MQTT broker
-#define MQTT_BROKER_URI     "mqtt://192.168.1.100"
+#define MQTT_BROKER_URI     "mqtt://10.147.14.207"
 #define MQTT_BROKER_PORT    1883
 #define MQTT_USERNAME       "telegraf"
 #define MQTT_PASSWORD       "ESP32_S3"

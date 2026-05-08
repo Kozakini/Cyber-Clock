@@ -41,8 +41,8 @@
 // ============================================================
 //  KONFIGURACJA — uzupełnij!
 // ============================================================
-#define WIFI_SSID       ""
-#define WIFI_PASSWORD   ""
+#define WIFI_SSID       "Pixel_3517"
+#define WIFI_PASSWORD   "44332211"
 
 // Klucz API z openweathermap.org (darmowy plan)
 #define OWM_API_KEY     ""
@@ -55,9 +55,7 @@
 // Interwał odświeżania (sekundy) — minimum 180s zgodnie z docs!
 #define REFRESH_INTERVAL_SEC  180
 
-// ============================================================
-//  Piny SPI — takie same jak w poprzednim pliku
-// ============================================================
+
 #define PIN_MOSI   14
 #define PIN_CLK    41
 #define PIN_CS     13
