@@ -487,26 +487,7 @@ void app_main(void) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
     }
-    ESP_ERROR_CHECK(ret);
-        EventBits_t bits = xEventGroupGetBits(wifi_event_group);
-    if (bits & WIFI_CONNECTED_BIT) {
 
-        ESP_LOGI(TAG, "Inicjalizacja protokołu MQTT...");
-
-        esp_mqtt_client_config_t mqtt_cfg = {
-            .broker.address.uri = "mqtt://192.168.1.43",
-            .broker.address.port = 1883,
-        };
-
-        esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
-        esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
-
-        // Start klienta
-        esp_mqtt_client_start(client);
-
-    } else {
-        ESP_LOGE(TAG, "MQTT nie wystartuje - brak połączenia sieciowego.");
-    }
   // raz na starcie
 
 
@@ -536,7 +517,26 @@ void app_main(void) {
     // ---- Pętla główna ----
     int  cycle         = 0;
     // Pogodę odświeżamy co 10 cykli = co 50 min (ograniczenie API: 60 req/h)
+    ESP_ERROR_CHECK(ret);
+        EventBits_t bits = xEventGroupGetBits(wifi_event_group);
+    if (bits & WIFI_CONNECTED_BIT) {
 
+        ESP_LOGI(TAG, "Inicjalizacja protokołu MQTT...");
+
+        esp_mqtt_client_config_t mqtt_cfg = {
+            .broker.address.uri = "mqtt://192.168.1.43",
+            .broker.address.port = 1883,
+        };
+
+        esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
+        esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
+
+        // Start klienta
+        esp_mqtt_client_start(client);
+
+    } else {
+        ESP_LOGE(TAG, "MQTT nie wystartuje - brak połączenia sieciowego.");
+    }
 
     if (sntp_get_sync_status() == SNTP_SYNC_STATUS_COMPLETED)
         ESP_LOGI(TAG, "NTP OK");
