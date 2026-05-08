@@ -18,7 +18,6 @@
 #include <math.h>
 #include <time.h>
 #include <sys/time.h>
-#include "bme280_mqtt.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -29,7 +28,7 @@
 #include "esp_log.h"
 #include "esp_sntp.h"
 #include "nvs_flash.h"
-
+#include "mqtt_client.h"
 #include "esp_http_client.h"
 #include "cJSON.h"
 
@@ -39,7 +38,6 @@
 #include "epd_ui.h"
 
 // ============================================================
-//  KONFIGURACJA — uzupełnij!
 // ============================================================
 #define WIFI_SSID       "Pixel_3517"
 #define WIFI_PASSWORD   "44332211"
@@ -90,6 +88,35 @@ static EventGroupHandle_t wifi_event_group;
 #define HTTP_BUF_SIZE 2048
 static char http_buf[HTTP_BUF_SIZE];
 static int  http_buf_len;
+
+static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
+{
+    esp_mqtt_event_handle_t event = event_data;      //tutaj jest zbiór danych z nazwami pomiarów, można by podzielić pomiary na czujniki (wątki) do wysłania oddzielnie albo zrobić to na jednym topic
+    switch (event->event_id) {
+        case MQTT_EVENT_CONNECTED:
+            ESP_LOGI(TAG, "MQTT Połączony z brokerem ✓");
+            cJSON *root = cJSON_CreateObject();
+            cJSON_AddNumberToObject(root, "temperature", 23.45);
+            cJSON_AddNumberToObject(root, "humidity",    48.7);
+            cJSON_AddNumberToObject(root, "pressure",   1013.25);
+            cJSON_AddStringToObject(root, "device",     "esp32_s3_01");
+            cJSON_AddNumberToObject(root, "timestamp",  12);
+            char *json_str = cJSON_PrintUnformatted(root);
+
+            esp_mqtt_client_publish(event->client, "sensors/bme280", json_str, 0, 1, 0);
+            cJSON_free(json_str);
+            cJSON_Delete(root);
+            break;
+        case MQTT_EVENT_DISCONNECTED:
+            ESP_LOGW(TAG, "MQTT Rozłączony");
+            break;
+        case MQTT_EVENT_ERROR:
+            ESP_LOGE(TAG, "Błąd MQTT. Typ: %d", event->error_handle->error_type);
+            break;
+        default:
+            break;
+    }
+}
 
 // ============================================================
 //  Globalne dane pogody
@@ -461,7 +488,26 @@ void app_main(void) {
         ret = nvs_flash_init();
     }
     ESP_ERROR_CHECK(ret);
-    bme280_mqtt_init();  // raz na starcie
+        EventBits_t bits = xEventGroupGetBits(wifi_event_group);
+    if (bits & WIFI_CONNECTED_BIT) {
+
+        ESP_LOGI(TAG, "Inicjalizacja protokołu MQTT...");
+
+        esp_mqtt_client_config_t mqtt_cfg = {
+            .broker.address.uri = "mqtt://192.168.1.43",
+            .broker.address.port = 1883,
+        };
+
+        esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
+        esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
+
+        // Start klienta
+        esp_mqtt_client_start(client);
+
+    } else {
+        ESP_LOGE(TAG, "MQTT nie wystartuje - brak połączenia sieciowego.");
+    }
+  // raz na starcie
 
 
 
@@ -532,39 +578,3 @@ void app_main(void) {
         vTaskDelay(pdMS_TO_TICKS((uint32_t)REFRESH_INTERVAL_SEC * 1000));
     }
 }
-
-/*
- * ============================================================
- *  bmp_to_c.py — konwerter BMP/PNG → tablica C
- * ============================================================
- *
- * #!/usr/bin/env python3
- * import sys
- * from PIL import Image
- *
- * img = Image.open(sys.argv[1]).convert("1")  # 1-bit
- * w, h = img.size
- * print(f"// {w}x{h} px")
- * print(f"#define BMP_W {w}")
- * print(f"#define BMP_H {h}")
- * print("static const uint8_t bmp_data[] = {")
- * pix = img.load()
- * row_bytes = (w + 7) // 8
- * for y in range(h):
- *     row = []
- *     for bx in range(row_bytes):
- *         byte = 0
- *         for bit in range(8):
- *             x = bx * 8 + bit
- *             if x < w:
- *                 # PIL: 0=czarny 255=biały → e-Paper: 0=czarny 1=biały (bit=1)
- *                 if pix[x, y] != 0:
- *                     byte |= (0x80 >> bit)
- *             else:
- *                 byte |= (0x80 >> bit)  # padding = biały
- *         row.append(f"0x{byte:02X}")
- *     print("    " + ",".join(row) + ",")
- * print("};")
- *
- * ============================================================
- */
