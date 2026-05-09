@@ -546,8 +546,6 @@ void app_main(void) {
         // Czas
         ui_time_t now;
         get_time(&now);
-        bme280_data_t data;
-        bme280_mqtt_publish(&data);  // odczyt + publikacja JSON
 
         // data.temperature, data.humidity, data.pressure
         // możesz przekazać do swojego kodu e-Paper

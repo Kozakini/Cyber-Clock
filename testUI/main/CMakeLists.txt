@@ -2,7 +2,6 @@ idf_component_register(
     SRCS
         "main.c"
         "epd_ui.c"
-        "bme280_mqtt.c"
     INCLUDE_DIRS
         "."
     REQUIRES
@@ -11,8 +10,9 @@ idf_component_register(
         esp_event
         esp_netif
         esp_http_client
-        json
-        driver
+        cjson
+        esp_driver_spi
+        esp_driver_gpio
         esp_timer
-    PRIV_REQUIRES mqtt driver
+    PRIV_REQUIRES espressif__mqtt
 )
