@@ -31,7 +31,6 @@
 #include "mqtt_client.h"
 #include "esp_http_client.h"
 #include "cJSON.h"
-#include "bme280_mqtt.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 
@@ -88,8 +87,14 @@ static EventGroupHandle_t wifi_event_group;
 #define HTTP_BUF_SIZE 2048
 static char http_buf[HTTP_BUF_SIZE];
 static int  http_buf_len;
+static bool mqtt_connected = false;
+static esp_mqtt_client_handle_t mqtt_client = NULL;
 
-// W głównym pliku — zamień mqtt_event_handler i inicjalizację
+// I2C + BME280
+#include "i2c_bus.h"
+static i2c_bus_handle_t i2c_bus = NULL;
+static bme280_handle_t  bme280  = NULL;
+
 
 static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
                                 int32_t event_id, void *event_data)
@@ -99,7 +104,8 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
         case MQTT_EVENT_CONNECTED:
             ESP_LOGI(TAG, "MQTT Połączony z brokerem ✓");
             // Uruchom task z odczytami zamiast hardkodowanych danych
-            bme280_mqtt_task_start(event->client);
+            mqtt_connected = true;
+            mqtt_client = event->client;
             break;
         case MQTT_EVENT_DISCONNECTED:
             ESP_LOGW(TAG, "MQTT Rozłączony");
@@ -505,12 +511,24 @@ void app_main(void) {
     wifi_init();
     ntp_sync();
 
+    // Init I2C + BME280
+    i2c_config_t i2c_cfg = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = 46,
+        .scl_io_num = 18,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = 400000,
+    };
+    i2c_bus = i2c_bus_create(I2C_NUM_0, &i2c_cfg);
+    bme280 = bme280_create(i2c_bus, 0x77);
+    bme280_default_init(bme280);
+
     // Pierwsze pobranie pogody
     fetch_weather();
 
     // ---- Pętla główna ----
     int  cycle         = 0;
-    bme280_init();
     // Pogodę odświeżamy co 10 cykli = co 50 min (ograniczenie API: 60 req/h)
     ESP_ERROR_CHECK(ret);
         EventBits_t bits = xEventGroupGetBits(wifi_event_group);
@@ -545,6 +563,19 @@ void app_main(void) {
         // data.temperature, data.humidity, data.pressure
         // możesz przekazać do swojego kodu e-Paper
 
+        // Odczyt BME280 + publikacja MQTT
+        if (mqtt_connected && bme280) {
+            float temp, hum, pres;
+            bme280_read_temperature(bme280, &temp);
+            bme280_read_humidity(bme280, &hum);
+            bme280_read_pressure(bme280, &pres);
+            char json_str[128];
+            snprintf(json_str, sizeof(json_str),
+                "{\"temperature\":%.1f,\"humidity\":%.1f,\"pressure\":%.1f}",
+                temp, hum, pres/100.0f);
+            esp_mqtt_client_publish(mqtt_client, "sensors/bme280", json_str, 0, 1, 0);
+            ESP_LOGI(TAG, "BME280: %s", json_str);
+        }
         vTaskDelay(pdMS_TO_TICKS(180000));  // 180s
         // Rysuj UI
         ui_draw(&now, &g_weather, bmp_data, BMP_W, BMP_H);

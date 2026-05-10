@@ -2,7 +2,6 @@ idf_component_register(
     SRCS
         "main.c"
         "epd_ui.c"
-        "bme280_mqtt.c"
     INCLUDE_DIRS
         "."
     REQUIRES
@@ -15,5 +14,6 @@ idf_component_register(
         esp_driver_spi
         esp_driver_gpio
         esp_timer
+        espressif__bme280
     PRIV_REQUIRES espressif__mqtt
 )
