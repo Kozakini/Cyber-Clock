@@ -2,6 +2,7 @@ idf_component_register(
     SRCS
         "main.c"
         "epd_ui.c"
+        "bme280_mqtt.c"
     INCLUDE_DIRS
         "."
     REQUIRES

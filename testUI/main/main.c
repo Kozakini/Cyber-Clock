@@ -21,7 +21,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
-
+#include "bme280.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
@@ -31,7 +31,7 @@
 #include "mqtt_client.h"
 #include "esp_http_client.h"
 #include "cJSON.h"
-
+#include "bme280_mqtt.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 
@@ -40,7 +40,7 @@
 // ============================================================
 // ============================================================
 #define WIFI_SSID       "Pixel_3517"
-#define WIFI_PASSWORD   "44332211"
+#define WIFI_PASSWORD   ""
 
 // Klucz API z openweathermap.org (darmowy plan)
 #define OWM_API_KEY     ""
@@ -89,23 +89,17 @@ static EventGroupHandle_t wifi_event_group;
 static char http_buf[HTTP_BUF_SIZE];
 static int  http_buf_len;
 
-static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_t event_id, void *event_data)
+// W głównym pliku — zamień mqtt_event_handler i inicjalizację
+
+static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
+                                int32_t event_id, void *event_data)
 {
-    esp_mqtt_event_handle_t event = event_data;      //tutaj jest zbiór danych z nazwami pomiarów, można by podzielić pomiary na czujniki (wątki) do wysłania oddzielnie albo zrobić to na jednym topic
+    esp_mqtt_event_handle_t event = event_data;
     switch (event->event_id) {
         case MQTT_EVENT_CONNECTED:
             ESP_LOGI(TAG, "MQTT Połączony z brokerem ✓");
-            cJSON *root = cJSON_CreateObject();
-            cJSON_AddNumberToObject(root, "temperature", 23.45);
-            cJSON_AddNumberToObject(root, "humidity",    48.7);
-            cJSON_AddNumberToObject(root, "pressure",   1013.25);
-            cJSON_AddStringToObject(root, "device",     "esp32_s3_01");
-            cJSON_AddNumberToObject(root, "timestamp",  12);
-            char *json_str = cJSON_PrintUnformatted(root);
-
-            esp_mqtt_client_publish(event->client, "sensors/bme280", json_str, 0, 1, 0);
-            cJSON_free(json_str);
-            cJSON_Delete(root);
+            // Uruchom task z odczytami zamiast hardkodowanych danych
+            bme280_mqtt_task_start(event->client);
             break;
         case MQTT_EVENT_DISCONNECTED:
             ESP_LOGW(TAG, "MQTT Rozłączony");
@@ -516,6 +510,7 @@ void app_main(void) {
 
     // ---- Pętla główna ----
     int  cycle         = 0;
+    bme280_init();
     // Pogodę odświeżamy co 10 cykli = co 50 min (ograniczenie API: 60 req/h)
     ESP_ERROR_CHECK(ret);
         EventBits_t bits = xEventGroupGetBits(wifi_event_group);
