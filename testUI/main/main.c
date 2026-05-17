@@ -21,7 +21,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
-#include "bme280.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
 #include "esp_event.h"
@@ -35,11 +34,13 @@
 #include "driver/gpio.h"
 
 #include "epd_ui.h"
+#include "bme280_sens.h"
+#include "bme280_mqtt.h"
 
 // ============================================================
 // ============================================================
-#define WIFI_SSID       "Pixel_3517"
-#define WIFI_PASSWORD   ""
+#define WIFI_SSID       "T-Mobile_Swiatlowod_6250_2.4GHz"
+#define WIFI_PASSWORD   "01039360404081385398"
 
 // Klucz API z openweathermap.org (darmowy plan)
 #define OWM_API_KEY     ""
@@ -87,36 +88,31 @@ static EventGroupHandle_t wifi_event_group;
 #define HTTP_BUF_SIZE 2048
 static char http_buf[HTTP_BUF_SIZE];
 static int  http_buf_len;
-static bool mqtt_connected = false;
-static esp_mqtt_client_handle_t mqtt_client = NULL;
-
-// I2C + BME280
-#include "i2c_bus.h"
-static i2c_bus_handle_t i2c_bus = NULL;
-static bme280_handle_t  bme280  = NULL;
 
 
-static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
-                                int32_t event_id, void *event_data)
+static void sensor_task(void *pvParameters)
 {
-    esp_mqtt_event_handle_t event = event_data;
-    switch (event->event_id) {
-        case MQTT_EVENT_CONNECTED:
-            ESP_LOGI(TAG, "MQTT Połączony z brokerem ✓");
-            // Uruchom task z odczytami zamiast hardkodowanych danych
-            mqtt_connected = true;
-            mqtt_client = event->client;
-            break;
-        case MQTT_EVENT_DISCONNECTED:
-            ESP_LOGW(TAG, "MQTT Rozłączony");
-            break;
-        case MQTT_EVENT_ERROR:
-            ESP_LOGE(TAG, "Błąd MQTT. Typ: %d", event->error_handle->error_type);
-            break;
-        default:
-            break;
+    float temperature, pressure, humidity;
+
+    while (true)
+    {
+        if (bme280_read_values(&temperature, &pressure, &humidity) == ESP_OK)
+        {
+            ESP_LOGI("SENSOR", "🌡️ Temp: %.2f °C | 📊 Press: %.1f hPa | 💧 Hum: %.1f %%", 
+                     temperature, pressure/1000, humidity);
+
+            mqtt_publish_data(temperature, pressure/1000, humidity);
+        }
+        else
+        {
+            ESP_LOGE("SENSOR", "Błąd odczytu BME280");
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(2500));
     }
 }
+
+
 
 // ============================================================
 //  Globalne dane pogody
@@ -511,18 +507,8 @@ void app_main(void) {
     wifi_init();
     ntp_sync();
 
-    // Init I2C + BME280
-    i2c_config_t i2c_cfg = {
-        .mode = I2C_MODE_MASTER,
-        .sda_io_num = 46,
-        .scl_io_num = 18,
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = 400000,
-    };
-    i2c_bus = i2c_bus_create(I2C_NUM_0, &i2c_cfg);
-    bme280 = bme280_create(i2c_bus, 0x77);
-    bme280_default_init(bme280);
+    //BME280 initialization
+    ESP_ERROR_CHECK(bme280_init_sensor());
 
     // Pierwsze pobranie pogody
     fetch_weather();
@@ -536,16 +522,7 @@ void app_main(void) {
 
         ESP_LOGI(TAG, "Inicjalizacja protokołu MQTT...");
 
-        esp_mqtt_client_config_t mqtt_cfg = {
-            .broker.address.uri = "mqtt://192.168.1.43",
-            .broker.address.port = 1883,
-        };
-
-        esp_mqtt_client_handle_t client = esp_mqtt_client_init(&mqtt_cfg);
-        esp_mqtt_client_register_event(client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
-
-        // Start klienta
-        esp_mqtt_client_start(client);
+        ESP_ERROR_CHECK(mqtt_init());
 
     } else {
         ESP_LOGE(TAG, "MQTT nie wystartuje - brak połączenia sieciowego.");
@@ -564,17 +541,21 @@ void app_main(void) {
         // możesz przekazać do swojego kodu e-Paper
 
         // Odczyt BME280 + publikacja MQTT
-        if (mqtt_connected && bme280) {
-            float temp, hum, pres;
-            bme280_read_temperature(bme280, &temp);
-            bme280_read_humidity(bme280, &hum);
-            bme280_read_pressure(bme280, &pres);
-            char json_str[128];
-            snprintf(json_str, sizeof(json_str),
-                "{\"temperature\":%.1f,\"humidity\":%.1f,\"pressure\":%.1f}",
-                temp, hum, pres/100.0f);
-            esp_mqtt_client_publish(mqtt_client, "sensors/bme280", json_str, 0, 1, 0);
-            ESP_LOGI(TAG, "BME280: %s", json_str);
+        float temp, hum, pres;
+
+        if (bme280_read_values(&temp, &pres, &hum) == ESP_OK)
+        {
+            ESP_LOGI(TAG,
+                "🌡️ Temp: %.2f °C | 📊 Press: %.1f hPa | 💧 Hum: %.1f %%",
+                temp,
+                pres / 1000,
+                hum);
+
+            mqtt_publish_data(temp, pres / 1000, hum);
+        }
+        else
+        {
+            ESP_LOGE(TAG, "Błąd odczytu BME280");
         }
         vTaskDelay(pdMS_TO_TICKS(180000));  // 180s
         // Rysuj UI

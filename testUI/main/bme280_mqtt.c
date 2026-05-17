@@ -1,101 +1,60 @@
-// bme280_mqtt.c
-#include <string.h>
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
-#include "esp_log.h"
-#include "esp_timer.h"
-#include "cJSON.h"
-#include "mqtt_client.h"
-#include "i2c_bus.h"
-#include "bme280.h"
 #include "bme280_mqtt.h"
+#include "cJSON.h"
+#include "esp_log.h"
 
-#define I2C_MASTER_SCL_IO       18
-#define I2C_MASTER_SDA_IO       46
-#define I2C_MASTER_FREQ_HZ      400000
-#define I2C_PORT                I2C_NUM_0
-#define BME280_I2C_ADDR         0x77        // twój czujnik na 0x77
+static const char *TAG = "MQTT";
+static esp_mqtt_client_handle_t mqtt_client = NULL;
 
-#define MQTT_TOPIC              "sensors/bme280"
-#define MQTT_PUBLISH_INTERVAL_MS 5000
-
-static const char *TAG = "BME280_MQTT";
-
-static i2c_bus_handle_t  i2c_bus    = NULL;
-static bme280_handle_t   bme280     = NULL;
-static esp_mqtt_client_handle_t s_mqtt_client = NULL;
-
-void bme280_init(void)
+static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
+                               int32_t event_id, void *event_data)
 {
-    i2c_config_t conf = {
-        .mode             = I2C_MODE_MASTER,
-        .sda_io_num       = I2C_MASTER_SDA_IO,
-        .sda_pullup_en    = GPIO_PULLUP_ENABLE,
-        .scl_io_num       = I2C_MASTER_SCL_IO,
-        .scl_pullup_en    = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = I2C_MASTER_FREQ_HZ,
+    esp_mqtt_event_handle_t event = event_data;
+    switch (event->event_id) {
+        case MQTT_EVENT_CONNECTED:
+            ESP_LOGI(TAG, "MQTT Połączony z brokerem ✓");
+            break;
+
+        case MQTT_EVENT_DISCONNECTED:
+            ESP_LOGW(TAG, "MQTT Rozłączony");
+            break;
+
+        case MQTT_EVENT_ERROR:
+            ESP_LOGE(TAG, "Błąd MQTT. Typ: %d", event->error_handle->error_type);
+            break;
+
+        default:
+            break;
+    }
+}
+
+esp_err_t mqtt_init(void)
+{
+    esp_mqtt_client_config_t mqtt_cfg = {
+        .broker.address.uri = "mqtt://192.168.1.43",
+        .broker.address.port = 1883,
     };
-    i2c_bus = i2c_bus_create(I2C_PORT, &conf);
-    if (!i2c_bus) {
-        ESP_LOGE(TAG, "Błąd inicjalizacji magistrali I2C");
-        return;
-    }
 
-    bme280 = bme280_create(i2c_bus, BME280_I2C_ADDR);
-    if (!bme280) {
-        ESP_LOGE(TAG, "Błąd tworzenia uchwytu BME280");
-        return;
-    }
+    mqtt_client = esp_mqtt_client_init(&mqtt_cfg);
+    esp_mqtt_client_register_event(mqtt_client, ESP_EVENT_ANY_ID, mqtt_event_handler, NULL);
+    esp_mqtt_client_start(mqtt_client);
 
-    ESP_ERROR_CHECK(bme280_default_init(bme280));
-    ESP_LOGI(TAG, "BME280 zainicjalizowany ✓");
+    return ESP_OK;
 }
 
-static void bme280_mqtt_task(void *pvParameters)
+void mqtt_publish_data(float temp, float press, float hum)
 {
-    float temperature, pressure, humidity;
+    if (mqtt_client == NULL) return;
 
-    while (1) {
-        vTaskDelay(pdMS_TO_TICKS(MQTT_PUBLISH_INTERVAL_MS));
+    cJSON *root = cJSON_CreateObject();
+    cJSON_AddNumberToObject(root, "temperature", temp);
+    cJSON_AddNumberToObject(root, "humidity",    hum);
+    cJSON_AddNumberToObject(root, "pressure",    press);
+    cJSON_AddStringToObject(root, "device",      "esp32_s3_01");
 
-        esp_err_t ret = ESP_OK;
-        ret |= bme280_read_temperature(bme280, &temperature);
-        ret |= bme280_read_pressure(bme280, &pressure);
-        ret |= bme280_read_humidity(bme280, &humidity);
+    char *json_str = cJSON_PrintUnformatted(root);
+    
+    esp_mqtt_client_publish(mqtt_client, "sensors/bme280", json_str, 0, 1, 0);
 
-        if (ret != ESP_OK) {
-            ESP_LOGE(TAG, "Błąd odczytu BME280");
-            continue;
-        }
-
-        ESP_LOGI(TAG, "T=%.2f°C  H=%.2f%%  P=%.2fhPa",
-                 temperature, humidity, pressure / 100.0f);
-
-        if (!s_mqtt_client) continue;
-
-        cJSON *root = cJSON_CreateObject();
-        cJSON_AddNumberToObject(root, "temperature", temperature);
-        cJSON_AddNumberToObject(root, "humidity",    humidity);
-        cJSON_AddNumberToObject(root, "pressure",    pressure / 100.0f);
-        cJSON_AddStringToObject(root, "device",      "esp32_s3_01");
-        cJSON_AddNumberToObject(root, "timestamp",   (double)esp_timer_get_time() / 1e6);
-
-        char *json_str = cJSON_PrintUnformatted(root);
-        if (json_str) {
-            esp_mqtt_client_publish(s_mqtt_client, MQTT_TOPIC, json_str, 0, 1, 0);
-            ESP_LOGI(TAG, "Opublikowano → %s", MQTT_TOPIC);
-            cJSON_free(json_str);
-        }
-        cJSON_Delete(root);
-    }
-}
-
-void bme280_mqtt_task_start(esp_mqtt_client_handle_t client)
-{
-    s_mqtt_client = client;
-    static bool started = false;
-    if (!started) {
-        xTaskCreate(bme280_mqtt_task, "bme280_mqtt", 4096, NULL, 5, NULL);
-        started = true;
-    }
+    cJSON_free(json_str);
+    cJSON_Delete(root);
 }

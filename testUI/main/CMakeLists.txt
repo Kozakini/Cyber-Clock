@@ -2,6 +2,8 @@ idf_component_register(
     SRCS
         "main.c"
         "epd_ui.c"
+        "bme280_sens.c"
+        "bme280_mqtt.c"
     INCLUDE_DIRS
         "."
     REQUIRES
@@ -9,11 +11,12 @@ idf_component_register(
         esp_wifi
         esp_event
         esp_netif
+        esp_common
         esp_http_client
         cjson
+        bmp280
         esp_driver_spi
         esp_driver_gpio
         esp_timer
-        espressif__bme280
-    PRIV_REQUIRES espressif__mqtt
+    PRIV_REQUIRES mqtt
 )
