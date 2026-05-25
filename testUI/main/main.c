@@ -32,15 +32,15 @@
 #include "cJSON.h"
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
-
+#include "driver/gpio.h"
 #include "epd_ui.h"
 #include "bme280_sens.h"
 #include "bme280_mqtt.h"
 
 // ============================================================
 // ============================================================
-#define WIFI_SSID       "T-Mobile_Swiatlowod_6250_2.4GHz"
-#define WIFI_PASSWORD   "01039360404081385398"
+#define WIFI_SSID       "Pixel_3517"
+#define WIFI_PASSWORD   "44332211"
 
 // Klucz API z openweathermap.org (darmowy plan)
 #define OWM_API_KEY     ""
@@ -61,6 +61,7 @@
 #define PIN_RST    11
 #define PIN_BUSY   10
 #define PIN_PWR     9
+#define GPIO_NUM_19 19
 
 // ============================================================
 //  Stałe EPD (wewnętrzne — ten sam kontroler)
@@ -98,7 +99,7 @@ static void sensor_task(void *pvParameters)
     {
         if (bme280_read_values(&temperature, &pressure, &humidity) == ESP_OK)
         {
-            ESP_LOGI("SENSOR", "🌡️ Temp: %.2f °C | 📊 Press: %.1f hPa | 💧 Hum: %.1f %%", 
+            ESP_LOGI("SENSOR", "🌡️ Temp: %.2f °C | 📊 Press: %.1f hPa | 💧 Hum: %.1f %%",
                      temperature, pressure/1000, humidity);
 
             mqtt_publish_data(temperature, pressure/1000, humidity);
@@ -475,6 +476,7 @@ static void fetch_weather(void) {
 //  Główna pętla
 // ============================================================
 void app_main(void) {
+    gpio_set_level(GPIO_NUM_19, 1);
     ESP_LOGI(TAG, "Start EPD Dashboard");
 
     // NVS
@@ -483,6 +485,16 @@ void app_main(void) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
     }
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << GPIO_NUM_19),
+        .mode         = GPIO_MODE_OUTPUT,
+        .pull_up_en   = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type    = GPIO_INTR_DISABLE,
+    };
+    gpio_config(&io_conf);
+
+    gpio_set_level(GPIO_NUM_19, 1);  // stan wysoki
 
   // raz na starcie
 
@@ -557,7 +569,7 @@ void app_main(void) {
         {
             ESP_LOGE(TAG, "Błąd odczytu BME280");
         }
-        vTaskDelay(pdMS_TO_TICKS(180000));  // 180s
+ // 180s
         // Rysuj UI
         ui_draw(&now, &g_weather, bmp_data, BMP_W, BMP_H);
 
@@ -581,5 +593,6 @@ void app_main(void) {
 
         ESP_LOGI(TAG, "Czekam %d sekund...", REFRESH_INTERVAL_SEC);
         vTaskDelay(pdMS_TO_TICKS((uint32_t)REFRESH_INTERVAL_SEC * 1000));
+
     }
 }

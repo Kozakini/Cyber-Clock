@@ -45,6 +45,7 @@ esp_err_t bme280_init_sensor(void)
         if (err == ESP_OK)
             err = bmp280_init(&dev, &params);
     }
+    dev.i2c_dev.cfg.master.clk_speed = 100000;
 
     if (err != ESP_OK)
     {

@@ -30,7 +30,7 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base,
 esp_err_t mqtt_init(void)
 {
     esp_mqtt_client_config_t mqtt_cfg = {
-        .broker.address.uri = "mqtt://192.168.1.43",
+        .broker.address.uri = "mqtt://10.203.118.207",
         .broker.address.port = 1883,
     };
 
@@ -52,7 +52,7 @@ void mqtt_publish_data(float temp, float press, float hum)
     cJSON_AddStringToObject(root, "device",      "esp32_s3_01");
 
     char *json_str = cJSON_PrintUnformatted(root);
-    
+
     esp_mqtt_client_publish(mqtt_client, "sensors/bme280", json_str, 0, 1, 0);
 
     cJSON_free(json_str);
